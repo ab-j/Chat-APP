@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build":"npm i"
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend "
   },
   "author": "abhishek jakhar",
   "license": "ISC",

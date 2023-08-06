@@ -15,14 +15,14 @@ conncetDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 
 
 
-app.get("/", (req, res) => {
-    res.setHeader("Access-Control-Credentials","true");
-    res.send("Api is running");
-});
+// app.get("/", (req, res) => {
+//     res.setHeader("Access-Control-Credentials","true");
+//     res.send("Api is running");
+// });
 
 app.use('/api/user',userRoutes);
 app.use('/api/chat',chatRoutes);
@@ -30,19 +30,19 @@ app.use('/api/message',messageRoutes);
 
 // --------------------------deployment------------------------------
 
-// const __dirname1 = path.resolve();
+const __dirname1 = path.resolve();
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname1, "/frontend/build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
 
-//   app.get("*", (req, res) =>
-//     res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
-//   );
-// } else {
-//   app.get("/", (req, res) => {
-//     res.send("API is running..");
-//   });
-// }
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
 
 // --------------------------deployment------------------------------
 
